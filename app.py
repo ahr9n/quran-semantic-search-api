@@ -3,6 +3,8 @@ from flask_restful import Api
 from predict import MostSimilarByWord, MostSimilarByTopic
 
 app = Flask(__name__)
+app.config["JSON_AS_ASCII"] = False
+
 api = Api(app)
 
 # routes to apis 
