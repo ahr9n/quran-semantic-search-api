@@ -1,5 +1,6 @@
 from flask_restful import Resource, reqparse
 from gensim.models import KeyedVectors, Word2Vec
+import helpers
 
 # model = KeyedVectors.load("models/model.pkl")
 model = Word2Vec.load('models/full_grams_cbow_100_twitter.mdl')
@@ -17,9 +18,14 @@ class MostSimilarByWord(Resource):
         args = parser.parse_args()  # creates dict
         word = args['word']
 
-        out = {'results': model.most_similar(word)}
-
-        return out, 200
+        word = helpers.clean_text(word).replace(" ", "_")
+        if word in model.wv:
+            most_similar = model.wv.most_similar(word, topn=10)
+            for term, score in most_similar:
+                term = helpers.clean_str(term).replace(" ", "_")
+            return {'results': most_similar}, 200
+        else:
+            return {'results': 'Word not found'}, 404
 
 
 # Not yet implemented
