@@ -7,11 +7,10 @@ WORKDIR /project
 # adds all files to the working directory
 ADD . /project
 
-# upgrades to the latest pip
-RUN pip3 -q install pip --upgrade
-
-# installs all required modules/dependencies in my container
-RUN pip install -r requirements.txt
+# upgrades pip and installs required modules/dependencies in my container
+RUN \
+    pip3 -q install pip --upgrade \
+    && pip install -r requirements.txt
 
 # forward the request from port 5000 on the host to port 5000 in the container
 EXPOSE 5000
