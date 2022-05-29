@@ -1,7 +1,8 @@
 from flask_restful import Resource, reqparse
-from gensim.models import KeyedVectors
+from gensim.models import KeyedVectors, Word2Vec
 
-model = KeyedVectors.load("models/model.pkl")
+# model = KeyedVectors.load("models/model.pkl")
+model = Word2Vec.load('models/full_grams_cbow_100_twitter.mdl')
 
 
 class MostSimilarByWord(Resource):
