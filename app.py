@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_restful import Api
-from predict import MostSimilarByWord, MostSimilarByTopic
+from predict import MostSimilarWord, MostSimilarVerse
 
 app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False
@@ -8,8 +8,8 @@ app.config["JSON_AS_ASCII"] = False
 api = Api(app)
 
 # routes to apis 
-api.add_resource(MostSimilarByWord, '/similar-word')
-api.add_resource(MostSimilarByTopic, '/similar-topic')
+api.add_resource(MostSimilarWord, '/similar-word')
+api.add_resource(MostSimilarVerse, '/similar-verse')
 
 
 if __name__ == '__main__':
