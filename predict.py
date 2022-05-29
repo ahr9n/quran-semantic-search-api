@@ -21,6 +21,7 @@ class MostSimilarByWord(Resource):
         return out, 200
 
 
+# Not yet implemented
 class MostSimilarByTopic(Resource):
 
     def post(self):
