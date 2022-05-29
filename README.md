@@ -37,7 +37,7 @@ sh build.sh
 
 1. To get the most similar words by a word
 ```bash
-curl --header "Content-Type: application/json" --request GET --data '{"word": "ضيزى"}' http://0.0.0.0:5000/similar-word
+curl --header "Content-Type: application/json" --request GET --data http://0.0.0.0:5000/similar-word/ضيزى
 ```
 ```json
 {
@@ -88,7 +88,7 @@ curl --header "Content-Type: application/json" --request GET --data '{"word": "�
 
 2. To get the most similar verses by a query
 ```bash
-curl --header "Content-Type: application/json" --request GET --data '{"query": "شجاعة"}' http://0.0.0.0:5000/similar-verse
+curl --header "Content-Type: application/json" --request GET http://0.0.0.0:5000/similar-verse/شجاعة
 ```
 ```json
 {
