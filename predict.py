@@ -1,3 +1,4 @@
+from statistics import mode
 from flask import jsonify, make_response
 from flask_restful import Resource, reqparse
 from gensim.models import KeyedVectors, Word2Vec
@@ -7,9 +8,9 @@ model = KeyedVectors.load("models/model.pkl")
 # model = Word2Vec.load('models/full_grams_cbow_100_twitter.mdl')
 
 
-class MostSimilarByWord(Resource):
+class MostSimilarWord(Resource):
 
-    def post(self):
+    def get(self):
         '''Outputs the 10 most similar words from the Holy Quran,
         besides their relative similarity scores for the given word.'''
 
@@ -29,13 +30,18 @@ class MostSimilarByWord(Resource):
         return make_response(jsonify({'results': out}), 200)
 
 
-# Not yet implemented
-class MostSimilarByTopic(Resource):
+class MostSimilarVerse(Resource):
 
-    def post(self):
-        '''Outputs the 10 most similar verses from the Holy Quran,
-        besides their relative similarity scores for the given topic (one or more words).'''
+    def get(self):
+        '''Outputs the 10 most similar words from the Holy Quran,
+        besides their relative frequency scores for the given query.'''
 
-        out = {'results': 'Not yet implemented'}
+        parser = reqparse.RequestParser()
+        parser.add_argument('query')
 
-        return out, 200
+        args = parser.parse_args()  # creates dict
+        query = args['query']
+
+        out = helpers.get_most_similar_verses(query, model)
+
+        return make_response(jsonify({'results': out}), 200)

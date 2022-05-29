@@ -33,52 +33,40 @@ def clean_str(text):
     return text
 
 
-def get_vec(n_model, dim, token):
-    vec = np.zeros(dim)
-    if token not in n_model.wv:
-        _count = 0
-        for w in token.split("_"):
-            if w in n_model.wv:
-                _count += 1
-                vec += n_model.wv[w]
-        if _count > 0:
-            vec = vec / _count
-    else:
-        vec = n_model.wv[token]
-    return vec
+def get_verse_frequency_score(query_word, verse_text, model):
+    '''
+    Calculate the frequency score of a verse with a given word
+    '''
+
+    freq = 0
+    for verse_word in verse_text.split():
+        if verse_word not in model:
+            continue
+        score = model.similarity(query_word, verse_word)
+        if score > 0.3:
+            freq += 1
+    return freq
 
 
-def calc_vec(pos_tokens, neg_tokens, n_model, dim):
-    vec = np.zeros(dim)
-    for p in pos_tokens:
-        vec += get_vec(n_model, dim, p)
-    for n in neg_tokens:
-        vec -= get_vec(n_model, dim, n)
+def get_most_similar_verses(query_word, model):
+    '''
+    Get the most similar verses to the query word based on the frequency score
+    '''
 
-    return vec
+    # Prepare/Read Quran data
+    quran_clean_text = open("data/quran-simple-clean.txt").readlines()
 
-# -- Retrieve all ngrams for a text in between a specific range
+    # Maybe use this instead to display well-formed verses
+    quran = open("data/quran-simple-min.txt").readlines()
 
+    verse_scores, index = [], 0
+    for verse in quran_clean_text:
+        score = get_verse_frequency_score(query_word, verse, model)
+        verse_scores.append((score, index))
+        index += 1
 
-def get_all_ngrams(text, nrange=3):
-    text = re.sub(r'[\,\.\;\(\)\[\]\_\+\#\@\!\?\؟\^]', ' ', text)
-    tokens = [token for token in text.split(" ") if token.strip() != ""]
-    ngs = []
-    for n in range(2, nrange+1):
-        ngs += [ng for ng in ngrams(tokens, n)]
-    return ["_".join(ng) for ng in ngs if len(ng) > 0]
+    verse_scores.sort(reverse=True)
 
-# -- Retrieve all ngrams for a text in a specific n
-
-
-def get_ngrams(text, n=2):
-    text = re.sub(r'[\,\.\;\(\)\[\]\_\+\#\@\!\?\؟\^]', ' ', text)
-    tokens = [token for token in text.split(" ") if token.strip() != ""]
-    ngs = [ng for ng in ngrams(tokens, n)]
-    return ["_".join(ng) for ng in ngs if len(ng) > 0]
-
-# -- filter the existed tokens in a specific model
-
-
-def get_existed_tokens(tokens, n_model):
-    return [tok for tok in tokens if tok in n_model.wv]
+    # TODO: check max length of verses_scores
+    most_similar_verses = [quran_clean_text[index][:-1] for score, index in verse_scores[:10]]
+    return most_similar_verses
