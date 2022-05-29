@@ -11,14 +11,12 @@ You can obtain:
 ## Setup
 
 1. Clone the repository and head to main folder.
-2. Download [`ksucca_full_cbow`](https://drive.google.com/u/0/uc?id=1rZiOKy71Z_WycxnOG9bwrNoAc4ziGo_n) and place it in folder caled `data` in the repository.
+2. Download [`ksucca_full_cbow`](https://drive.google.com/u/0/uc?id=1rZiOKy71Z_WycxnOG9bwrNoAc4ziGo_n) and place it in the `data` folder.
 3. Head/Refer again to this main folder, and run the following command:
 ```bash
 sh build.sh
 ```
 <details> <summary>Helpful notes</summary>
-
-* You may first create the folder `data`.
 
 * The bash file will require Python3 and the package installer for Python (pip) to run.
 
@@ -117,3 +115,4 @@ curl --header "Content-Type: application/json" --request GET http://0.0.0.0:5000
 
 ## Sources
 * [Arabic Islamic Corpus for training the Word2Vec Model](https://github.com/EyadMShokry/SearchQuranByTopic#word2vec-model)
+* [Tanzil Quran text](https://tanzil.net/download/)
