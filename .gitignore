@@ -6,3 +6,7 @@ data/full_grams_cbow_100_twitter.mdl.trainables.syn1neg.npy
 data/full_grams_cbow_100_twitter.mdl.wv.vectors.npy
 data/full_grams_cbow_100_twitter.zip
 data/full_grams_cbow_100_twitter.mdl
+__pycache__/helpers.cpython-38.pyc
+models/full_grams_cbow_100_twitter.mdl
+models/full_grams_cbow_100_twitter.mdl.wv.vectors.npy
+models/full_grams_cbow_100_twitter.mdl.trainables.syn1neg.npy

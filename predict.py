@@ -18,7 +18,7 @@ class MostSimilarByWord(Resource):
         args = parser.parse_args()  # creates dict
         word = args['word']
 
-        word = helpers.clean_text(word).replace(" ", "_")
+        word = helpers.clean_str(word).replace(" ", "_")
         if word in model.wv:
             most_similar = model.wv.most_similar(word, topn=10)
             for term, score in most_similar:
