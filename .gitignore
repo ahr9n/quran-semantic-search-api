@@ -2,3 +2,7 @@ __pycache__/predict.cpython-38.pyc
 data/GoogleNews-vectors-negative300.bin.gz
 models/model.pkl
 models/model.pkl.vectors.npy
+data/full_grams_cbow_100_twitter.mdl.trainables.syn1neg.npy
+data/full_grams_cbow_100_twitter.mdl.wv.vectors.npy
+data/full_grams_cbow_100_twitter.zip
+data/full_grams_cbow_100_twitter.mdl
