@@ -1,0 +1,4 @@
+__pycache__/predict.cpython-38.pyc
+data/GoogleNews-vectors-negative300.bin.gz
+models/model.pkl
+models/model.pkl.vectors.npy
