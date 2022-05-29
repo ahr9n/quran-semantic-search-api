@@ -11,3 +11,5 @@ models/full_grams_cbow_100_twitter.mdl
 models/full_grams_cbow_100_twitter.mdl.wv.vectors.npy
 models/full_grams_cbow_100_twitter.mdl.trainables.syn1neg.npy
 data/ksucca_full_cbow.bin
+data/quran-simple-clean.txt
+data/quran-simple-min.txt
