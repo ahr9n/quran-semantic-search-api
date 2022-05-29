@@ -10,15 +10,9 @@ model = KeyedVectors.load("models/model.pkl")
 
 class MostSimilarWord(Resource):
 
-    def get(self):
+    def get(self, word):
         '''Outputs the 10 most similar words from the Holy Quran,
         besides their relative similarity scores for the given word.'''
-
-        parser = reqparse.RequestParser()
-        parser.add_argument('word')
-
-        args = parser.parse_args()  # creates dict
-        word = args['word']
 
         most_similar = model.most_similar(word, topn=10)
 
@@ -32,15 +26,9 @@ class MostSimilarWord(Resource):
 
 class MostSimilarVerse(Resource):
 
-    def get(self):
+    def get(self, query):
         '''Outputs the 10 most similar words from the Holy Quran,
         besides their relative frequency scores for the given query.'''
-
-        parser = reqparse.RequestParser()
-        parser.add_argument('query')
-
-        args = parser.parse_args()  # creates dict
-        query = args['query']
 
         out = helpers.get_most_similar_verses(query, model)
 
