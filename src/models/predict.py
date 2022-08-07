@@ -6,11 +6,11 @@ from .preprocess import *
 from .semantic_methods import *
 from .pooling import *
 
-# model_wiki = Word2Vec.load('../../models/full_grams_cbow_300_wiki.mdl').wv
-# model_tw = Word2Vec.load('../../models/full_grams_cbow_300_twitter.mdl').wv
-# model_ksucca = KeyedVectors.load_word2vec_format('../../data/processed/ksucca_full_cbow.bin', binary=True)
-model_ksucca = KeyedVectors.load("../../models/model.pkl")
-# model_fasttext = KeyedVectors.load_word2vec_format("../../models/cc.ar.300.vec")
+# model_wiki = Word2Vec.load('././models/full_grams_cbow_300_wiki.mdl').wv
+# model_tw = Word2Vec.load('././models/full_grams_cbow_300_twitter.mdl').wv
+# model_ksucca = KeyedVectors.load_word2vec_format('././data/processed/ksucca_full_cbow.bin', binary=True)
+model_ksucca = KeyedVectors.load("././models/model.pkl")
+# model_fasttext = KeyedVectors.load_word2vec_format("././models/cc.ar.300.vec")
 
 quran_clean_text = get_quran_clean_text()
 
