@@ -7,22 +7,23 @@ from .semantic_methods import *
 from .pooling import *
 
 # model_wiki = Word2Vec.load('././models/full_grams_cbow_100_wiki.mdl').wv 
-model_tw = Word2Vec.load('././models/full_grams_cbow_100_twitter.mdl').wv
-# model_ksucca = KeyedVectors.load_word2vec_format('././data/processed/ksucca_full_cbow.bin', binary=True)
+# model_tw = Word2Vec.load('././models/full_grams_cbow_100_twitter.mdl').wv
+model_ksucca = KeyedVectors.load_word2vec_format('././data/processed/ksucca_full_cbow.bin', binary=True)
 # model_ksucca = KeyedVectors.load("././models/model.pkl")
 # model_fasttext = KeyedVectors.load_word2vec_format("././models/cc.ar.300.vec")
 
 quran_clean_text = get_quran_clean_text()
 
-def fetch(verse_ids):
-    output = []
-    for id in verse_ids:
-        url = f"http://localhost:8000/api/lexical/verse-in-quran/{id}"
-        headers = {'content-type': 'application/json'}
-        results = get(url, headers=headers)
-        results = results.json()
-        output.append(results['data'])
-    return output
+# Use after running Quran lexical search API (https://github.com/ahr9n/quran-lexical-search-api)
+# def fetch(verse_ids):
+#     output = []
+#     for id in verse_ids:
+#         url = f"http://localhost:8000/api/lexical/verse-in-quran/{id}"
+#         headers = {'content-type': 'application/json'}
+#         results = get(url, headers=headers)
+#         results = results.json()
+#         output.append(results['data'])
+#     return output
 
 class MostSimilarWord(Resource):
 
@@ -64,12 +65,13 @@ class MostSimilarVerse(Resource):
 
         # Fixing: TypeError(Object of type float32 is not JSON serializable)
         for idx, (score, verse_id, verse) in enumerate(results):
-            tmp = (float(score), verse_id, verse)
+            tmp = (float(score), verse_id+1, verse)
             results[idx] = tmp
 
         print(results[:3])
 
-        results = [verse_id+1 for score, verse_id, verse in results]
-        results = fetch(results)
+        # Look at line 17
+        # results = [verse_id+1 for score, verse_id, verse in results]
+        # results = fetch(results)
 
         return make_response(jsonify({'length': len(results), 'data': results}), 200)
