@@ -4,10 +4,10 @@ import numpy as np
 
 quran_clean_text = get_quran_clean_text()
 
+
 def get_max_pooling_vec(query_text, model):
     '''
     Get the max pooling vector for the given tokens.
-
     @param query_text: list of words
     @type query_text: list
     @param model: tuple of the pre-trained model to use and its name
@@ -31,7 +31,7 @@ def get_max_pooling_vec(query_text, model):
 
         if cleaned not in model_vectors:
             continue
-        
+
         vec = model_vectors[cleaned]
         for idx in range(300):
             max_pooling_vec[idx] = max(max_pooling_vec[idx], vec[idx])
@@ -42,7 +42,6 @@ def get_max_pooling_vec(query_text, model):
 def get_avg_pooling_vec(query_text, model):
     '''
     Get the average pooling vector for the given tokens.
-
     @param query_text: list of words
     @type query_text: list
     @param model: tuple of the pre-trained model to use and its name
@@ -57,17 +56,17 @@ def get_avg_pooling_vec(query_text, model):
 
     cnt = 0
     (model_vectors, model_name) = model
-    
+
     for token in query_text:
         cleaned = clean(token, model_name)
         if len(cleaned):
             cleaned = cleaned[0]
         else:
             cleaned = ''
-        
+
         if cleaned not in model_vectors:
-            continue   
-        
+            continue
+
         cnt += 1
         vec = model_vectors[cleaned]
         for idx in range(300):
@@ -75,7 +74,7 @@ def get_avg_pooling_vec(query_text, model):
 
     for idx in range(300):
         avg_pooling_vec[idx] /= max(1, cnt)
-    
+
     return avg_pooling_vec
 
 
@@ -83,7 +82,6 @@ def get_pooling_results(query_text, model, method):
     '''
     Get the pooling results for the given tokens,
     according to the given model and method.
-
     @param query_text: list of words
     @type query_text: list
     @param model: tuple of the pre-trained model to use and its name
